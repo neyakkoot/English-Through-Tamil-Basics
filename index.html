@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📘 3 மாத ஆங்கிலப் பயணம் | தமிழ்வழி | 12 வாரங்கள்</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(175deg, #f5e7d3 0%, #dbbc8b 100%);
+            font-family: 'Segoe UI', 'Tamil', 'Latha', 'Helvetica Neue', sans-serif;
+            padding: 30px 15px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .master-container {
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: rgba(255, 250, 235, 0.9);
+            backdrop-filter: blur(14px);
+            border-radius: 80px 80px 80px 20px;
+            padding: 40px 40px;
+            box-shadow: 0 30px 50px -15px #5f4a2b, 0 0 0 4px #cba15e inset;
+            border-left: 12px solid #b85e2c;
+            border-right: 12px solid #1d6275;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .hero-content {
+            flex: 2;
+        }
+
+        .hero-main-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #2f1d0a, #7b4f24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-sub-title {
+            background: #264e5e;
+            color: #fee69c;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-size: 1.9rem;
+            display: inline-block;
+            margin: 20px 0 15px;
+            border: 4px solid #f0b341;
+        }
+
+        .mentor-card {
+            background: #49361d;
+            color: #ffdc9f;
+            padding: 20px 40px;
+            border-radius: 120px;
+            font-size: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 25px;
+            border: 4px solid #eaa737;
+            box-shadow: 0 12px 0 #2f1d0a;
+            flex-wrap: wrap;
+        }
+
+        .profile-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            border: 8px solid #bd7b37;
+            object-fit: cover;
+            box-shadow: 0 0 40px #febf5e;
+        }
+
+        /* ===== மாதப் பிரிவு (Month Tabs) ===== */
+        .month-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 35px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .month-btn {
+            background: #2b4857;
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.8rem;
+            border-radius: 70px;
+            cursor: pointer;
+            border: 3px solid #e5a742;
+            box-shadow: 0 10px 0 #15313d;
+            font-weight: bold;
+            transition: 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .month-btn.active {
+            background: #cf7b2b;
+            color: #1d2800;
+            border-color: #ffd966;
+            box-shadow: 0 8px 0 #75471b;
+            transform: translateY(4px);
+        }
+
+        /* ===== வார அட்டைகள் (Week Cards) ===== */
+        .weeks-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .week-card {
+            background: rgba(255, 250, 240, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 90px 20px 90px 20px;
+            padding: 20px 30px;
+            border-left: 18px solid;
+            box-shadow: 0 20px 25px -12px #5e4529, 0 0 0 2px #e6be7c inset;
+        }
+
+        /* வண்ணக் குறியீடு */
+        .week-card[data-month="1"] { border-left-color: #a3512b; }  /* முதல் மாதம் */
+        .week-card[data-month="2"] { border-left-color: #1f7a5c; }  /* இரண்டாம் மாதம் */
+        .week-card[data-month="3"] { border-left-color: #3f6b9c; }  /* மூன்றாம் மாதம் */
+
+        .week-header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .week-badge {
+            background: #3f2d15;
+            color: #ffda8b;
+            min-width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            border: 5px solid #f0b843;
+            box-shadow: 0 12px 0 #2b1c0b;
+        }
+
+        .week-badge span {
+            font-size: 1rem;
+            background: #b67b30;
+            color: black;
+            padding: 4px 15px;
+            border-radius: 50px;
+            margin-top: 5px;
+        }
+
+        .week-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c1d0a;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .week-desc {
+            font-size: 1.2rem;
+            margin: 12px 0 8px;
+            padding-left: 10px;
+        }
+
+        .toggle-btn {
+            font-size: 2.8rem;
+            color: #aa5622;
+            cursor: pointer;
+            margin-left: auto;
+            transition: 0.2s;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.3);
+            color: #d1712a;
+        }
+
+        /* ===== 5-நாள் + தேர்வு விரிவாக்கம் ===== */
+        .week-expand {
+            display: none;
+            background: #faf1de;
+            border-radius: 60px;
+            padding: 30px 35px;
+            margin-top: 30px;
+            border: 4px dashed #ba8b4a;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .day-box {
+            background: #ffeecb;
+            border-radius: 35px;
+            padding: 20px 15px;
+            border: 3px solid #b37b3b;
+            box-shadow: 0 7px 0 #7f572a;
+        }
+
+        .day-box h4 {
+            background: #3f2c15;
+            color: #ffda88;
+            padding: 8px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .day-box ul {
+            list-style: none;
+        }
+
+        .day-box li {
+            padding: 6px 0;
+            border-bottom: 1px dashed #ba8f4a;
+            display: flex;
+            gap: 10px;
+        }
+
+        .test-section {
+            background: #283d47;
+            color: #ffe3a7;
+            padding: 25px 30px;
+            border-radius: 70px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 4px solid #e8b45a;
+        }
+
+        .test-icon {
+            font-size: 2.5rem;
+        }
+
+        .pill-note {
+            background: #37281a;
+            color: #ffc491;
+            padding: 12px 30px;
+            border-radius: 60px;
+            font-weight: 600;
+        }
+
+        /* ===== கற்றல் குறிப்புகள் ===== */
+        .tips-footer {
+            background: #2b2b1c;
+            border-radius: 80px 80px 30px 30px;
+            padding: 50px 40px;
+            margin: 60px 0 30px;
+            border: 6px solid #c79b4d;
+            color: #ffd58c;
+        }
+
+        .tips-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tip-item {
+            background: #423a25;
+            padding: 20px 35px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-left: 15px solid #eba052;
+        }
+
+        .footer-contact {
+            background: #3d311e;
+            border-radius: 60px;
+            padding: 25px 35px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            border: 4px solid #b27a38;
+            color: #fbdd9b;
+            font-size: 1.4rem;
+        }
+    </style>
+</head>
+<body>
+<div class="master-container">
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-main-title">
+                <i class="fas fa-language"></i> தமிழ்வழியில் அடிப்படை ஆங்கிலம்
+            </div>
+            <div class="hero-sub-title">
+                <i class="fas fa-calendar-alt"></i> 3 மாதங்கள் · 12 வாரங்கள் · வாரத்திற்கு 5 நாட்கள் + தேர்வு
+            </div>
+            <div class="mentor-card">
+                <i class="fas fa-chalkboard-teacher fa-2x"></i> 
+                <span>பயிற்றுநர்: முனைவர் சத்தியராஜ் தங்கச்சாமி (நேயக்கோ)</span>
+            </div>
+        </div>
+        <img src="https://raw.githubusercontent.com/neyakkoot/Direct_Selling_Course/main/Sathiyaraj.png" 
+             alt="Dr. Sathiyaraj" class="profile-img" onerror="this.style.display='none';">
+    </div>
+
+    <!-- மாதத் தேர்வு பொத்தான்கள் -->
+    <div class="month-tabs">
+        <button class="month-btn active" data-month="1"><i class="fas fa-seedling"></i> முதல் மாதம்</button>
+        <button class="month-btn" data-month="2"><i class="fas fa-tree"></i> இரண்டாம் மாதம்</button>
+        <button class="month-btn" data-month="3"><i class="fas fa-calendar-check"></i> மூன்றாம் மாதம்</button>
+    </div>
+
+    <!-- 12 வார அட்டவணை இங்கே ஜாவாஸ்கிரிப்ட் மூலம் நிரப்பப்படும் -->
+    <div id="weeksContainer" class="weeks-grid"></div>
+
+    <!-- கற்றல் குறிப்புகள் -->
+    <div class="tips-footer">
+        <div style="text-align: center; font-size: 2.5rem; margin-bottom: 30px;"><i class="fas fa-lightbulb"></i> கற்றலுக்கான முக்கிய குறிப்புகள் <i class="fas fa-lightbulb"></i></div>
+        <div class="tips-grid">
+            <div class="tip-item"><i class="fas fa-clock fa-2x"></i> தினமும் 30 நிமிடம்: பாடங்களை சத்தமாக வாசித்துப் பழகவும்.</div>
+            <div class="tip-item"><i class="fas fa-mirror fa-2x"></i> கண்ணாடி பயிற்சி: கண்ணாடி முன் நின்று நீங்களே ஆங்கிலத்தில் பேசிப் பாருங்கள்.</div>
+            <div class="tip-item"><i class="fas fa-sparkles fa-2x"></i> புதிய சொற்கள்: ஒரு நாளைக்கு குறைந்தது 5 புதிய சொற்களைக் கற்று வாக்கியத்தில் பயன்படுத்தவும்.</div>
+            <div class="tip-item"><i class="fas fa-rotate fa-2x"></i> தேர்வு: ஒவ்வொரு வாரமும் 6ஆம் நாள் தேர்வை எழுதி முன்னேற்றத்தைச் சரிபார்க்கவும்.</div>
+        </div>
+    </div>
+
+    <!-- தொடர்பு -->
+    <div class="footer-contact">
+        <span><i class="fas fa-phone-alt"></i> +91 9600370671</span>
+        <span><i class="fab fa-whatsapp" style="color:#25D366;"></i> </span>
+        <span><i class="fas fa-envelope"></i> sathiyarajkkt@gmail.com</span>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ---------- 12 வாரங்களுக்கான முழுத் தரவு (நாள் 1..5 + தேர்வு) ----------
+        const weekDetails = [
+            { // வாரம் 1
+                month:1, title:"அறிமுகம் மற்றும் ஒலிகள்", icon:"🔤",
+                desc:"ஆங்கில எழுத்துக்கள், ஒலிகள், எண்கள், நாட்கள்",
+                days:[
+                    "ஆங்கில எழுத்துக்கள் (A-Z) & உயிர்/மெய் எழுத்து வேறுபாடு",
+                    "Phonics - அடிப்படை ஒலிகள் (A முதல் Z வரை)",
+                    "ஈரெழுத்து, மூன்றெழுத்து சொற்களை வாசித்தல் (cat, dog, run)",
+                    "எண்கள் 1-50 & நிறங்களின் பெயர்கள் (Red, Blue, Green...)",
+                    "வாரத்தின் நாட்கள் (Sunday-Saturday) & மாதங்கள் (January-December)"
+                ],
+                test:"10 ஒலிகளைச் சரியாக உச்சரித்தல், 1-20 எண்களை எழுத்துப்பிழையின்றி எழுதுதல், வார நாட்களை வரிசைப்படுத்துதல்."
+            },
+            { // வாரம் 2
+                month:1, title:"பெயர்ச்சொற்கள் (Nouns)", icon:"👥",
+                desc:"Common/Proper nouns, ஒருமை/பன்மை, Pronouns, சொற்கள்",
+                days:[
+                    "Common vs Proper Nouns (city – Chennai; boy – Ram)",
+                    "ஒருமை/பன்மை விதிகள் ( -s, -es, -ies, irregular)",
+                    "பிரதிபெயர்ச்சொற்கள் (I, We, You, He, She, It, They)",
+                    "உடல் உறுப்புகள் மற்றும் உறவினர்கள் பெயர்கள்",
+                    "வீட்டு உபயோகப் பொருட்களின் ஆங்கிலப் பெயர்கள்"
+                ],
+                test:"கொடுக்கப்பட்ட 10 சொற்களைப் பன்மையாக மாற்றுதல், Pronouns-களை வாக்கியத்தில் சரியாகப் பொருத்துதல்."
+            },
+            { // வாரம் 3
+                month:1, title:"வினைச்சொற்கள் (Verbs)", icon:"🏃",
+                desc:"20 முக்கிய வினைச்சொற்கள், Be verbs, Have/Has",
+                days:[
+                    "20 முக்கிய செயற்சொற்கள் (Action Verbs: eat, sleep, run, read...)",
+                    "Am, Is, Are பயன்பாடு (நிகழ்காலம்)",
+                    "Was, Were பயன்பாடு (கடந்தகாலம்)",
+                    "Has, Have, Had பயன்பாடு",
+                    "எளிய அறிமுக வாக்கியங்கள் (I am a student. He has a book.)"
+                ],
+                test:"'Be' verbs கொண்டு 5 வாக்கியங்களை நிரப்புதல், 10 வினைச்சொற்களுக்குத் தமிழ் அர்த்தம் எழுதுதல்."
+            },
+            { // வாரம் 4
+                month:1, title:"விவரிக்கும் சொற்கள் (Adjectives & Articles)", icon:"🌈",
+                desc:"Adjectives, Opposites, A/An/The, This/That",
+                days:[
+                    "பண்புச்சொற்கள் (Tall, Small, Brave, Beautiful, Fast)",
+                    "எதிர்ச்சொற்கள் (Opposites: big/small, hot/cold)",
+                    "Articles (A, An, The) விதிகள் மற்றும் பயன்பாடு",
+                    "This, That, These, Those பயன்பாடு (சுட்டுச்சொற்கள்)",
+                    "சிறு வாக்கிய அமைப்புப் பயிற்சி (The red car is fast.)"
+                ],
+                test:"படங்களைப் பார்த்து Adjectives-ஆல் விவரித்தல், A/An/The பொருத்தமான இடத்தில் இடுதல்."
+            },
+            // வாரம் 5 (2ம் மாதம்)
+            { month:2, title:"எளிய நிகழ்காலம் (Simple Present)", icon:"⏰",
+                desc:"Daily habits, Present Continuous, Do/Does",
+                days:[
+                    "வழக்கமான செயல்கள் (Daily Habits – I wake up at 6.)",
+                    "'S' சேர்க்கும் விதி (Third Person Singular – He eats)",
+                    "Present Continuous (நடந்துகொண்டிருக்கும் செயல் – I am reading)",
+                    "'Daily Routine' பற்றிப் பேசுதல் (வாக்கியங்கள்)",
+                    "கேள்வி எழுப்புதல் (Do/Does – Do you like tea?)"
+                ],
+                test:"உங்கள் ஒரு நாள் அட்டவணையை 5 வாக்கியங்களில் எழுதுதல், வினைச்சொற்களைச் சரியான நிகழ்கால வடிவில் மாற்றுதல்."
+            },
+            { month:2, title:"கடந்தகாலம் (Past Tense)", icon:"⌛",
+                desc:"Simple Past (Regular/Irregular), Past Continuous, Did",
+                days:[
+                    "Simple Past (Regular Verbs -ed: played, watched)",
+                    "Irregular Verbs (Go-Went, Eat-Ate, See-Saw)",
+                    "Past Continuous (Was/Were + Verb+ing – I was sleeping)",
+                    "'நேற்று செய்தவை' பற்றி எழுதுதல் (Yesterday I went to... )",
+                    "கடந்தகாலக் கேள்விகள் (Did you see the movie?)"
+                ],
+                test:"கொடுக்கப்பட்ட நிகழ்காலக் கதையைக் கடந்தகாலமாக மாற்றுதல், 10 Irregular Verbs எழுதுதல்."
+            },
+            { month:2, title:"எதிர்காலம் (Future Tense)", icon:"🔮",
+                desc:"Will, Going to, Future Continuous",
+                days:[
+                    "Simple Future (Will – I will call you)",
+                    "Going to (திட்டமிட்டவை – I am going to buy a car)",
+                    "Future Continuous (I will be waiting for you)",
+                    "வருங்காலத் திட்டங்களைப் பகிர்தல் (Next week I will...)",
+                    "எதிர்காலக் கேள்விகள் (What will you do tomorrow?)"
+                ],
+                test:"'Next Week' திட்டத்தைப் பற்றி 5 வாக்கியங்கள் எழுதுதல், 'Will' மற்றும் 'Going to' வேறுபாடு கண்டறிதல்."
+            },
+            { month:2, title:"கேள்வி மற்றும் எதிர்மறை", icon:"❓",
+                desc:"Wh-Questions, Yes/No, Negatives (don't/doesn't)",
+                days:[
+                    "Wh-Questions (What, Why, Where, When, Who, How)",
+                    "Yes/No Questions (Are you happy? Did she come?)",
+                    "எதிர்மறை வாக்கியங்கள் (Don't, Doesn't, Didn't)",
+                    "உரையாடலில் கேள்விகள் கேட்டல் (Role-play)",
+                    "வாக்கியங்களை மாற்றியமைத்தல் (Positive to Negative)"
+                ],
+                test:"பதில்களுக்கு ஏற்ற கேள்விகளை உருவாக்குதல், 5 வாக்கியங்களை எதிர்மறையாக மாற்றுதல்."
+            },
+            // வாரம் 9 (3ம் மாதம்)
+            { month:3, title:"இணைப்புச் சொற்கள்", icon:"🔗",
+                desc:"Prepositions (In/On/At), Conjunctions (and/but/because)",
+                days:[
+                    "இடத்தைக் குறிக்கும் Prepositions (In, On, At, Under, Between)",
+                    "காலத்தைக் குறிக்கும் Prepositions (in May, on Monday, at 5pm)",
+                    "இணைப்புச் சொற்கள் (And, But, Because, So)",
+                    "திசைகள் மற்றும் வழி சொல்லுதல் (Go straight, turn left)",
+                    "நீளமான வாக்கியங்களை உருவாக்குதல் (I stayed home because it rained.)"
+                ],
+                test:"படத்தைப் பார்த்துப் பொருட்கள் எங்கே உள்ளன என எழுதுதல், வாக்கியங்களை இணைத்தல்."
+            },
+            { month:3, title:"உதவி வினைச்சொற்கள் (Modals)", icon:"⚙️",
+                desc:"Can/Could, Should/Must, May/Might",
+                days:[
+                    "Can, Could (திறமை – I can swim, Could you help?)",
+                    "Should, Must (கடமை – You should study, You must obey)",
+                    "May, Might (வாய்ப்பு – It may rain, I might come)",
+                    "அனுமதி கோருதல் (May I come in? Could I borrow this?)",
+                    "சூழ்நிலைக்கேற்ப Modals பயன்படுத்துதல்"
+                ],
+                test:"சரியான Modal Verb-ஐத் தேர்ந்தெடுத்தல், 5 அனுமதி கோரும் வாக்கியங்களை உருவாக்குதல்."
+            },
+            { month:3, title:"வாசித்தல் மற்றும் கேட்டல்", icon:"📖👂",
+                desc:"Reading, Listening, New words, Tongue twisters",
+                days:[
+                    "சிறு கதைகளை வாசித்தல் (The Fox and the Grapes)",
+                    "ஆங்கிலச் செய்திகளைக் கேட்டல் (YouTube – simple news)",
+                    "புதிய 20 மேம்பட்ட சொற்கள் (Vocabulary building)",
+                    "கேட்ட கதையைச் சுருக்கமாக எழுதுதல்",
+                    "உச்சரிப்புப் பயிற்சி (Tongue Twisters – She sells sea shells)"
+                ],
+                test:"ஒரு பத்தியைப் படித்து அதிலிருந்து கேட்கப்படும் கேள்விகளுக்குப் பதிலளித்தல் (Reading Comprehension)."
+            },
+            { month:3, title:"நிஜ உலக உரையாடல்கள்", icon:"💬",
+                desc:"Self intro, shopping, phone, interview",
+                days:[
+                    "சுய அறிமுகம் (Self Introduction – name, place, job)",
+                    "கடை/உணவகத்தில் உரையாடல் (How much? I want... )",
+                    "அலுவலக/நேர்காணல் உரையாடல் (Tell me about yourself)",
+                    "தொலைபேசி உரையாடல் (Hello, can I speak to...?)",
+                    "பொதுவான தலைப்பில் 2 நிமிடம் பேசுதல் (My hobby, family)"
+                ],
+                test:"1 நிமிடம் ஆங்கிலத்தில் தடையின்றிப் பேசுதல், ஒரு முழுமையான கடிதம் அல்லது மின்னஞ்சல் எழுதுதல்."
+            }
+        ];
+
+        const container = document.getElementById('weeksContainer');
+        function renderWeeks(monthFilter = 1) {
+            container.innerHTML = '';
+            weekDetails.forEach((w, idx) => {
+                if (w.month !== monthFilter) return; // மாத வடிகட்டி
+                const weekNum = idx+1; // உண்மையான வார எண்
+                const card = document.createElement('div');
+                card.className = 'week-card';
+                card.setAttribute('data-month', w.month);
+
+                // header
+                const header = document.createElement('div');
+                header.className = 'week-header';
+
+                const badge = document.createElement('div');
+                badge.className = 'week-badge';
+                badge.innerHTML = `<div>${weekNum}</div><span>வாரம்</span>`;
+
+                const titleWrap = document.createElement('div');
+                titleWrap.style.flex = '1';
+                const title = document.createElement('div');
+                title.className = 'week-title';
+                title.innerHTML = `${w.icon} ${w.title} <span style="background:#3f321a; padding:5px 18px; border-radius:40px; font-size:1.1rem;">மாதம் ${w.month}</span>`;
+                const desc = document.createElement('div');
+                desc.className = 'week-desc';
+                desc.innerText = w.desc;
+                titleWrap.appendChild(title);
+                titleWrap.appendChild(desc);
+
+                const toggle = document.createElement('div');
+                toggle.className = 'toggle-btn';
+                toggle.innerHTML = '➕';
+
+                header.appendChild(badge);
+                header.appendChild(titleWrap);
+                header.appendChild(toggle);
+                card.appendChild(header);
+
+                // expandable 5 days + test
+                const expand = document.createElement('div');
+                expand.className = 'week-expand';
+
+                // 5 நாட்கள் கட்டம்
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'days-grid';
+                for (let d = 0; d < 5; d++) {
+                    const dayBox = document.createElement('div');
+                    dayBox.className = 'day-box';
+                    dayBox.innerHTML = `<h4><i class="fas fa-sun"></i> நாள் ${d+1}</h4>
+                        <ul><li><i class="fas fa-check-circle" style="color:#be641d;"></i> ${w.days[d]}</li></ul>`;
+                    daysGrid.appendChild(dayBox);
+                }
+
+                // தேர்வு பகுதி
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-section';
+                testDiv.innerHTML = `
+                    <div class="test-icon"><i class="fas fa-pencil-alt fa-2x"></i></div>
+                    <div><strong style="font-size:1.6rem;">📆 நாள் 6 - வாரத் தேர்வு</strong><br>${w.test}</div>
+                    <div class="pill-note"><i class="fas fa-check-double"></i> மீள்பார்வை செய்க</div>
+                `;
+
+                expand.appendChild(daysGrid);
+                expand.appendChild(testDiv);
+                card.appendChild(expand);
+
+                container.appendChild(card);
+
+                // toggle
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (expand.style.display === 'none' || expand.style.display === '') {
+                        expand.style.display = 'block';
+                        toggle.innerHTML = '➖';
+                    } else {
+                        expand.style.display = 'none';
+                        toggle.innerHTML = '➕';
+                    }
+                });
+
+                expand.style.display = 'none';
+            });
+        }
+
+        // மாதத் தாவல்கள்
+        document.querySelectorAll('.month-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const month = parseInt(this.getAttribute('data-month'));
+                renderWeeks(month);
+            });
+        });
+
+        // முதல் மாதம் துவக்கம்
+        renderWeeks(1);
+    })();
+</script>
+</body>
+</html>
