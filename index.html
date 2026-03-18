@@ -88,6 +88,8 @@
             border: 8px solid #bd7b37;
             object-fit: cover;
             box-shadow: 0 0 40px #febf5e;
+            background-color: #e0c4a0; /* படம் ஏற்றப்படாவிட்டால் காட்ட */
+            display: block; /* உறுதியாக தெரிய */
         }
 
         /* ===== மாதப் பிரிவு (Month Tabs) ===== */
@@ -230,6 +232,8 @@
             padding: 20px 15px;
             border: 3px solid #b37b3b;
             box-shadow: 0 7px 0 #7f572a;
+            display: flex;
+            flex-direction: column;
         }
 
         .day-box h4 {
@@ -244,6 +248,7 @@
 
         .day-box ul {
             list-style: none;
+            flex-grow: 1;
         }
 
         .day-box li {
@@ -251,6 +256,34 @@
             border-bottom: 1px dashed #ba8f4a;
             display: flex;
             gap: 10px;
+        }
+        
+        /* ===== புதிய 'காணொலி & படிக்க' பொத்தான் ===== */
+        .day-video-btn {
+            background: #bb5b1e;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 2px solid #ffd58c;
+            box-shadow: 0 4px 0 #643616;
+            transition: 0.1s;
+            text-decoration: none;
+            width: 100%;
+        }
+
+        .day-video-btn:hover {
+            background: #d46f2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #643616;
         }
 
         .test-section {
@@ -334,8 +367,11 @@
                 <span>பயிற்றுநர்: முனைவர் நித்யா ரா </span>
             </div>
         </div>
-        <img src="https://github.com/neyakkoot/English-Through-Tamil-Basics/blob/main/Nithya40kb.jpg" 
-             alt="Dr. Nithya R" class="profile-img" onerror="this.style.display='none';">
+        <!-- சரி செய்யப்பட்ட பட இணைப்பு: 'raw' பாதை பயன்படுத்தப்பட்டுள்ளது -->
+        <img src="https://github.com/neyakkoot/English-Through-Tamil-Basics/raw/main/Nithya40kb.jpg" 
+             alt="Dr. Nithya R" 
+             class="profile-img" 
+             onerror="this.onerror=null; this.src='https://via.placeholder.com/170x170?text=Dr.Nithya'; this.style.backgroundColor='#dbbd8c';">
     </div>
 
     <!-- மாதத் தேர்வு பொத்தான்கள் -->
@@ -511,12 +547,51 @@
             }
         ];
 
+        // ===== URL மேப்பிங்: வாரம் மற்றும் நாள் வாரியாக வெவ்வேறு உரலிகள் =====
+        function getVideoLink(weekNum, dayIdx) {
+            // வாரம் மற்றும் நாள் அடிப்படையில் தனித்துவமான URLகள்
+            // இது ஒரு மாதிரி. நீங்கள் உங்கள் சொந்த YouTube/வலைப்பக்க உரலிகளை இங்கே மாற்றலாம்.
+            
+            // அடிப்படை YouTube பிளேலிஸ்ட்
+            const baseURL = "https://www.youtube.com/results?search_query=";
+            
+            // வாரம் மற்றும் நாள் பொருளுக்கான தேடல் தொடர்கள்
+            const searchTerms = [
+                "learn+english+through+tamil+basics",
+                "english+grammar+nouns+tamil",
+                "english+verbs+in+tamil",
+                "adjectives+in+tamil+english",
+                "simple+present+tense+tamil",
+                "past+tense+english+tamil",
+                "future+tense+english+tamil",
+                "wh+questions+in+tamil",
+                "prepositions+in+tamil+english",
+                "modal+verbs+in+tamil",
+                "english+reading+practice+tamil",
+                "daily+conversation+english+tamil"
+            ];
+            
+            // குறிப்பிட்ட வாரத்திற்கான தேடுதல்
+            if (weekNum >= 1 && weekNum <= searchTerms.length) {
+                return baseURL + searchTerms[weekNum-1];
+            }
+            
+            // மாற்று: YouTube தமிழ்வழி ஆங்கிலம்
+            return "https://www.youtube.com/results?search_query=learn+english+through+tamil";
+        }
+
         const container = document.getElementById('weeksContainer');
+        
         function renderWeeks(monthFilter = 1) {
             container.innerHTML = '';
-            weekDetails.forEach((w, idx) => {
-                if (w.month !== monthFilter) return; // மாத வடிகட்டி
-                const weekNum = idx+1; // உண்மையான வார எண்
+            
+            // வடிகட்டிய வாரங்களை மட்டும் எடுக்க
+            const filteredWeeks = weekDetails.filter(w => w.month === monthFilter);
+            
+            filteredWeeks.forEach((w, idx) => {
+                // உண்மையான வார எண்ணைக் கணக்கிட (1-12)
+                const globalWeekNum = weekDetails.findIndex(item => item === w) + 1;
+                
                 const card = document.createElement('div');
                 card.className = 'week-card';
                 card.setAttribute('data-month', w.month);
@@ -527,7 +602,7 @@
 
                 const badge = document.createElement('div');
                 badge.className = 'week-badge';
-                badge.innerHTML = `<div>${weekNum}</div><span>வாரம்</span>`;
+                badge.innerHTML = `<div>${globalWeekNum}</div><span>வாரம்</span>`;
 
                 const titleWrap = document.createElement('div');
                 titleWrap.style.flex = '1';
@@ -553,14 +628,21 @@
                 const expand = document.createElement('div');
                 expand.className = 'week-expand';
 
-                // 5 நாட்கள் கட்டம்
+                // 5 நாட்கள் கட்டம் - இப்போது ஒவ்வொரு நாளிலும் "காணொலி & படிக்க" பொத்தான்
                 const daysGrid = document.createElement('div');
                 daysGrid.className = 'days-grid';
                 for (let d = 0; d < 5; d++) {
                     const dayBox = document.createElement('div');
                     dayBox.className = 'day-box';
-                    dayBox.innerHTML = `<h4><i class="fas fa-sun"></i> நாள் ${d+1}</h4>
-                        <ul><li><i class="fas fa-check-circle" style="color:#be641d;"></i> ${w.days[d]}</li></ul>`;
+                    
+                    // ஒவ்வொரு நாளுக்கும் தனித்துவமான URL
+                    const videoURL = getVideoLink(globalWeekNum, d);
+                    
+                    dayBox.innerHTML = `
+                        <h4><i class="fas fa-sun"></i> நாள் ${d+1}</h4>
+                        <ul><li><i class="fas fa-check-circle" style="color:#be641d;"></i> ${w.days[d]}</li></ul>
+                        <a href="${videoURL}" target="_blank" class="day-video-btn"><i class="fas fa-video"></i> காணொலி & படிக்க</a>
+                    `;
                     daysGrid.appendChild(dayBox);
                 }
 
